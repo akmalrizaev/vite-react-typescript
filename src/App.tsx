@@ -1,15 +1,11 @@
 import { useState, ChangeEvent } from 'react';
 
+import { data } from './constants';
+
 import styles from './home.module.css';
-import { IData } from './interfaces/index.js';
+import { IData } from './interfaces';
 
 const App = (): JSX.Element => {
-  const data: IData[] = [
-    { title: 'Omar', id: 1, description: 'Description' },
-    { title: 'Osman', id: 1, description: 'Description' },
-    { title: 'Abdulloh', id: 1, description: 'Description' },
-  ];
-
   const [title, setTitle] = useState<string>();
   const [arr, setArr] = useState<IData[]>(data);
 
@@ -19,7 +15,18 @@ const App = (): JSX.Element => {
 
   const handleSubmit = (): void => {
     if (!title?.length) return;
+    const newData = {
+      title: title,
+      id: new Date().getTime(),
+      description: 'description',
+    };
+    setArr([...arr, newData]);
     setTitle('');
+  };
+
+  const deleteItem = (id: number): void => {
+    const newData = arr.filter((c) => c.id != id);
+    setArr(newData);
   };
 
   return (
@@ -40,6 +47,9 @@ const App = (): JSX.Element => {
         {arr.map((c) => (
           <div key={c.id} className={styles.cardItem}>
             <p>{c.title}</p>
+            <div className={styles.delBtn}>
+              <button onClick={() => deleteItem(c.id)}>Delete</button>
+            </div>
           </div>
         ))}
       </div>

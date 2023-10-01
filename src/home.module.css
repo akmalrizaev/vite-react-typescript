@@ -48,7 +48,23 @@
   border: 1px solid var(--border);
   margin-top: 10px;
   border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cardItem p {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.delBtn button {
+  padding: 5px 10px;
+  font-size: 17px;
+  text-transform: uppercase;
+  background-color: var(--red);
+  color: var(--white);
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
